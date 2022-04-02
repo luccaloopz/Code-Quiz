@@ -6,11 +6,11 @@
         <link rel="stylesheet" href="./assets/CSS/style.css"> 
     </head>
     <body>
-        <a id="highscores" href="#">View Highscores</a>
+        <a id="highscores" href="#highscores-form">View Highscores</a>
         <main id="container">
             <div id="welcome-container" class="visible">
                 <h1>Welcome to the Coding Quiz!</h1>
-                <p id="description">The following quiz consists of 5 coding related, multiple choice questions. You will have 2 minutes to complete all of the questions before the timer runs out. Upon completion of the quiz or if the timer runs out, you will save your attempt to a Highscores list. Good Luck!</p>
+                <p id="description">The following quiz consists of 5 coding related, multiple choice questions. You will have 2 minutes to complete all of the questions before the timer runs out. Each incorrect answer decreases the timer. Upon completion of the quiz or if the timer runs out, your attempt will be saved to a Highscores list. Good Luck!</p>
                 <button id="start">Start Quiz</button>
             </div>
             <div id="question-container" class="hide">
@@ -34,6 +34,22 @@
                     </div>
                 </div>
                 <button id="next">Next Question</button>
+            </div>
+            <div id="highscores-form" class="hide">
+                <h2>You're Finished!</h2>
+                <div>Your final score is: <span id="score"></span></div>
+                <form>
+                    <label for="initials">Enter your initials here:</label>
+                    <input type="text" id="initials" name="userInitials"><br>
+                    <input type="submit" value="Submit">
+                </form>    
+            </div>
+            <div id="highscores-list" class="hide">
+                <h2>Highscores</h2>
+                <ul id="listOfHighscores">
+                </ul>
+                <button id="go-back">Go Back</button>
+                <button id="clear-highscores">Clear Highscores</button>
             </div>
         </main>
         <script src="./assets/JS/javascript.js"></script>
