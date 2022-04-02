@@ -1,0 +1,19 @@
+body {
+    background-color: beige;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    margin: 5% 25%;
+    background-color: blanchedalmond;
+    border: 2px solid maroon;
+}
+
+h1 {
+    text-align: center;
+}
+
+#description {
+    text-align: center;
+}
