@@ -8,9 +8,33 @@
     <body>
         <a id="highscores" href="#">View Highscores</a>
         <main id="container">
-            <h1>Welcome to the Coding Quiz!</h1>
-            <p id="description">The following quiz consists of 5 coding related, multiple choice questions. You will have 2 minutes to complete all of the questions before the timer runs out. Upon completion of the quiz or if the timer runs out, you will save your attempt to a Highscores list. Good Luck!</p>
-            <button id="button">Start Quiz</button>
+            <div id="welcome-container">
+                <h1>Welcome to the Coding Quiz!</h1>
+                <p id="description">The following quiz consists of 5 coding related, multiple choice questions. You will have 2 minutes to complete all of the questions before the timer runs out. Upon completion of the quiz or if the timer runs out, you will save your attempt to a Highscores list. Good Luck!</p>
+                <button id="start">Start Quiz</button>
+            </div>
+            <div id="question-container" class="hide">
+                <div id="question">Question</div>
+                <div id="answer-choices">
+                    <div class="answers">
+                        <button class="button">A</button>
+                        <p>This is a placeholer for an answer choice.</p>
+                    </div>
+                    <div class="answers">
+                        <button class="button">B</button>
+                        <p>This is a placeholer for an answer choice.</p>
+                    </div>
+                    <div class="answers">
+                        <button class="button">C</button>
+                        <p>This is a placeholer for an answer choice.</p>
+                    </div>
+                    <div class="answers">
+                        <button class="button">D</button>
+                        <p>This is a placeholer for an answer choice.</p>
+                    </div>
+                </div>
+                <button id="next">Next Question</button>
+            </div>
         </main>
         <script src="./assets/JS/javascript.js"></script>
     </body>

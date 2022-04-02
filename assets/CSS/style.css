@@ -16,4 +16,39 @@ h1 {
 
 #description {
     text-align: center;
+    padding: 1%;
+}
+
+#question {
+    text-align: center;
+    font-weight: bold;
+}
+#answer-choices {
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    padding: 1% 2%;
+    font-weight: bold;
+}
+
+.answers {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
+#start {
+    margin-left: 45%;
+    margin-bottom: 1%;
+}
+
+#next {
+    margin: 1%;
+    float: right;
+}
+
+.hide {
+    display: none;
 }
