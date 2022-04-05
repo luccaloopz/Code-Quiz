@@ -7,20 +7,23 @@ var highscoresList = document.querySelector("#highscores-list");
 var goBack = document.querySelector("#go-back");
 var clearHighscores = document.querySelector("#clear-highscores");
 var answerText = document.querySelector(".answersABCD");
+var answerBtns = document.querySelector(".answers");
 var displayedQuestion = document.querySelector("#question");
 var nextButton = document.querySelector("#next");
-var button = document.querySelector(".button")
+var timer = document.querySelector(".timer")
 
 var currentQuestion;
+
+var secondsLeft = 121
 
 startButton.addEventListener("click", startTheGame);
 
 function startTheGame() {
-    console.log("The game has started");
     welcomeContainer.setAttribute("class", "hide");
     questionContainer.setAttribute("class", "visible");
     currentQuestion = 0;
     nextQuestionUp();
+    setTime();
 }
 
 highscores.addEventListener("click", showHighscores);
@@ -50,21 +53,51 @@ function clearAllTheHighscores() {
 }
 
 function nextQuestionUp() {
+    resetAnswers();
     grabQuestion(questions[currentQuestion]); //grabs the question bank array at the current index (initially set to 0)
-    
 }
 
 function grabQuestion(question) {
-    // this will run a for loop to show the current question and available answers to the user
+    // this will run a for loop to show the current question and available answers to the user 
     displayedQuestion.textContent = question.question;
     question.answers.forEach(element => {
-        answerText.textContent = element.written
+        const button = document.createElement("button")
+        button.innerText = element.written
+        button.setAttribute("class", "button")
         if (element.correctness) {
             button.dataset.correctness = element.correctness;
         }
+        answerBtns.appendChild(button)
     });
 }
 
+nextButton.addEventListener("click", () => {
+    currentQuestion++;
+    nextQuestionUp();
+
+})
+
+function resetAnswers() {
+    while (answerBtns.firstChild) {
+        answerBtns.removeChild(answerBtns.firstChild)
+    }
+}
+
+function chosenAnswer(answer) {
+    //if chosen answer is correct, logs the answer into localStorage
+    // 
+}
+
+function setTime() {
+    var timerInterval = setInterval(function() {
+        secondsLeft--
+        timer.textContent = "Seconds left: "  + secondsLeft
+
+        if (secondsLeft === 0) {
+            clearInterval(timerInterval)
+        }
+    }, 1000)
+}
 
 const questions = [
     {
