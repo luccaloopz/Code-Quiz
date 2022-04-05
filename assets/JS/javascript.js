@@ -9,24 +9,23 @@ var clearHighscores = document.querySelector("#clear-highscores");
 var answerText = document.querySelector(".answersABCD");
 var answerBtns = document.querySelector(".answers");
 var displayedQuestion = document.querySelector("#question");
-var nextButton = document.querySelector("#next");
-var timer = document.querySelector(".timer")
+var timer = document.querySelector(".timer");
 
 var currentQuestion;
 
-var secondsLeft = 121
+var secondsLeft = 120
 
 startButton.addEventListener("click", startTheGame);
 
 function startTheGame() {
+    setTime();
     welcomeContainer.setAttribute("class", "hide");
     questionContainer.setAttribute("class", "visible");
     currentQuestion = 0;
     nextQuestionUp();
-    setTime();
 }
 
-highscores.addEventListener("click", showHighscores);
+highscores.addEventListener("click", showHighscores); // **this will need to be a button instead
 
 function showHighscores() {
     welcomeContainer.setAttribute("class", "hide");
@@ -49,11 +48,10 @@ clearHighscores.addEventListener("click", clearAllTheHighscores);
 
 function clearAllTheHighscores() {
     console.log("highscores are cleared");
-    //this will need to clear highscores
+    //**this will need to clear highscores
 }
 
 function nextQuestionUp() {
-    resetAnswers();
     grabQuestion(questions[currentQuestion]); //grabs the question bank array at the current index (initially set to 0)
 }
 
@@ -68,24 +66,14 @@ function grabQuestion(question) {
             button.dataset.correctness = element.correctness;
         }
         answerBtns.appendChild(button)
-    });
+    }); 
+    //** If user answers question correctly, they are moved on to a new problem. If they answer wrong, timer gets deducted and they move onto new problem */
 }
 
-nextButton.addEventListener("click", () => {
-    currentQuestion++;
-    nextQuestionUp();
+function chosenAnswer(event) { //* We might only need to log the ending time to localStorage so that highscores can pull the data */
+    //if chosen answer is correct, log the answer into localStorage as true
+    //if chosen answer is wrong, log the answer into localStorage as false and decrease timer by 20 seconds(secondsLeft var?. in other words 'secondsLeft=secondsLeft -20'?) 
 
-})
-
-function resetAnswers() {
-    while (answerBtns.firstChild) {
-        answerBtns.removeChild(answerBtns.firstChild)
-    }
-}
-
-function chosenAnswer(answer) {
-    //if chosen answer is correct, logs the answer into localStorage
-    // 
 }
 
 function setTime() {
