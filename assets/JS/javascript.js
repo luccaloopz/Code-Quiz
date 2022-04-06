@@ -6,23 +6,22 @@ var highscoresForm = document.querySelector("#highscores-form");
 var highscoresList = document.querySelector("#highscores-list");
 var goBack = document.querySelector("#go-back");
 var clearHighscores = document.querySelector("#clear-highscores");
-var answerText = document.querySelector(".answersABCD");
 var answerBtns = document.querySelector(".answers");
 var displayedQuestion = document.querySelector("#question");
 var timer = document.querySelector(".timer");
 
 var currentQuestion;
 
-var secondsLeft = 120
+var secondsLeft = 120;
 
 startButton.addEventListener("click", startTheGame);
 
 function startTheGame() {
-    setTime();
     welcomeContainer.setAttribute("class", "hide");
     questionContainer.setAttribute("class", "visible");
     currentQuestion = 0;
     nextQuestionUp();
+    setTime();
 }
 
 highscores.addEventListener("click", showHighscores); // **this will need to be a button instead
@@ -52,29 +51,61 @@ function clearAllTheHighscores() {
 }
 
 function nextQuestionUp() {
-    grabQuestion(questions[currentQuestion]); //grabs the question bank array at the current index (initially set to 0)
+    // for (var i = 0; i < questions.length; i++) {
+    //     grabQuestion(questions[i]);
+    //     console.log("test");
+    // }
+    // grabQuestion(questions[0]); //grabs the question bank array at the current index (initially set to 0)
+    // if (document.querySelector("button").clicked === true) {
+    //     console.log("test")
+    // }
+    resetQuestions()
+    if (currentQuestion < questions.length) {
+        grabQuestion(questions[currentQuestion])
+    } else {
+        highscoresForm.setAttribute("class", "visible")
+        questionContainer.setAttribute("class", "hide");
+    }
 }
 
 function grabQuestion(question) {
     // this will run a for loop to show the current question and available answers to the user 
     displayedQuestion.textContent = question.question;
     question.answers.forEach(element => {
-        const button = document.createElement("button")
+        var button = document.createElement("button")
         button.innerText = element.written
         button.setAttribute("class", "button")
         if (element.correctness) {
             button.dataset.correctness = element.correctness;
         }
         answerBtns.appendChild(button)
+        button.addEventListener("click", function(){
+            evaluateAnswer(element.correctness);
+        });
     }); 
+
     //** If user answers question correctly, they are moved on to a new problem. If they answer wrong, timer gets deducted and they move onto new problem */
 }
 
-function chosenAnswer(event) { //* We might only need to log the ending time to localStorage so that highscores can pull the data */
-    //if chosen answer is correct, log the answer into localStorage as true
-    //if chosen answer is wrong, log the answer into localStorage as false and decrease timer by 20 seconds(secondsLeft var?. in other words 'secondsLeft=secondsLeft -20'?) 
-
+function resetQuestions() {
+    while (answerBtns.firstChild) {
+        answerBtns.removeChild(answerBtns.firstChild)
+    }
 }
+ 
+// button.addEventListener("click", chosenAnswer)
+// function chosenAnswer(event) {
+// //     //if chosen answer is wrong, decrease timer by 20 seconds(secondsLeft var?. in other words 'secondsLeft=secondsLeft -20'?) 
+// //     //* We might only need to log the ending time to localStorage so that highscores can pull the data */
+//     var chosenAnswer = event.target
+//     var correct = chosenAnswer.dataset.correctness
+//     if (correct) {
+//         currentQuestion++
+//         grabQuestion()
+//     } else {
+//         secondsLeft = secondsLeft -20
+//     }
+// }
 
 function setTime() {
     var timerInterval = setInterval(function() {
@@ -82,9 +113,21 @@ function setTime() {
         timer.textContent = "Seconds left: "  + secondsLeft
 
         if (secondsLeft === 0) {
-            clearInterval(timerInterval)
+            clearInterval(timerInterval);
+            welcomeContainer.setAttribute("class", "visible");
+            questionContainer.setAttribute("class", "hide");
+            return secondsLeft;
         }
     }, 1000)
+}
+
+function evaluateAnswer(correctness) {
+    console.log(correctness)
+    currentQuestion++
+    if (!correctness) {
+        secondsLeft -= 20
+    }
+    nextQuestionUp()
 }
 
 const questions = [
