@@ -43,7 +43,6 @@ function showHighscores() {
     var scoresArr = JSON.parse(localStorage.getItem('myScores'));
     scoresArr.forEach(element => {
         highscoresLI.innerHTML += "<li>" + element.initials + ": " + element.score + "<li>";
-    welcomeContainer.setAttribute("class", "hide");
     });
 };
 
@@ -58,9 +57,8 @@ function goBackToMainPage() {
 clearHighscores.addEventListener("click", clearAllTheHighscores);
 
 function clearAllTheHighscores() {
-    console.log("highscores are cleared");
     localStorage.removeItem("myScores");
-    highscoresLI.innerHTML = " "
+    highscoresLI.innerHTML = " ";
 };
 
 function nextQuestionUp() {
@@ -87,8 +85,8 @@ function settingHighscores() {
     var scoresArr = JSON.parse(localStorage.getItem('myScores'));
     scoresArr.forEach(element => {
         highscoresLI.innerHTML += "<li>" + element.initials + ": " + element.score + "<li>";
-    })
-}
+    });
+};
 
 function grabQuestion(question) {
     displayedQuestion.textContent = question.question;
@@ -122,8 +120,8 @@ function setTime() {
             welcomeContainer.setAttribute("class", "visible");
             highscoresForm.setAttribute("class", "hide");
             questionContainer.setAttribute("class", "hide");
-        }
-    }, 1000)
+        };
+    }, 1000);
 };
 
 function evaluateAnswer(correctness) {
