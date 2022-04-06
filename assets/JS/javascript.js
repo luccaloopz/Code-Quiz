@@ -37,10 +37,14 @@ function startTheGame() {
 highscores.addEventListener("click", showHighscores);
 
 function showHighscores() {
+    highscoresList.setAttribute("class", "visible");
     welcomeContainer.setAttribute("class", "hide");
     questionContainer.setAttribute("class", "hide");
-    highscoresForm.setAttribute("class", "hide");
-    highscoresList.setAttribute("class", "visible");
+    var scoresArr = JSON.parse(localStorage.getItem('myScores'));
+    scoresArr.forEach(element => {
+        highscoresLI.innerHTML += "<li>" + element.initials + ": " + element.score + "<li>";
+    welcomeContainer.setAttribute("class", "hide");
+    });
 };
 
 goBack.addEventListener("click", goBackToMainPage);
