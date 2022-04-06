@@ -11,10 +11,17 @@ var displayedQuestion = document.querySelector("#question");
 var timer = document.querySelector(".timer");
 var score = document.querySelector("#score");
 var initials = document.querySelector("#initials");
+var submitButton = document.querySelector("#submitBtn")
 
 var currentQuestion;
 
-var secondsLeft = 5;
+var secondsLeft = 90;
+
+var myScore;
+
+var myScores = JSON.parse(localStorage.getItem('myScores')) || [];
+
+var timerInterval;
 
 startButton.addEventListener("click", startTheGame);
 
@@ -57,13 +64,25 @@ function nextQuestionUp() {
     if (currentQuestion < questions.length) {
         grabQuestion(questions[currentQuestion])
     } else {
-        score.textContent = secondsLeft;
-        window.localStorage.setItem("myScore", secondsLeft.toString()); //not sure if correct
-        
+        clearInterval(timerInterval);
+        myScore = secondsLeft;
+        score.textContent = myScore;
         highscoresForm.setAttribute("class", "visible");
         questionContainer.setAttribute("class", "hide");
     };
 };
+
+submitButton.addEventListener("click", function() {
+    var userInitials = initials.value;
+    myScores.push({score: myScore, initials: userInitials});
+    window.localStorage.setItem("myScores", JSON.stringify(myScores));
+    highscoresList.setAttribute("class", "visible");
+    highscoresForm.setAttribute("class", "hide");
+    var scoresArr = JSON.parse(localStorage.getItem('myScores'));
+    scoresArr.forEach(element => {
+        
+    })
+})
 
 function grabQuestion(question) {
     displayedQuestion.textContent = question.question;
@@ -88,16 +107,15 @@ function resetQuestions() {
 };
 
 function setTime() {
-    var timerInterval = setInterval(function() {
+    timerInterval = setInterval(function() {
         secondsLeft--;
         timer.textContent = "Seconds left: "  + secondsLeft;
 
-        if (secondsLeft === 0) {
+        if (secondsLeft < 0) {
             clearInterval(timerInterval);
             welcomeContainer.setAttribute("class", "visible");
             highscoresForm.setAttribute("class", "hide");
             questionContainer.setAttribute("class", "hide");
-            return secondsLeft;
         }
     }, 1000)
 };
