@@ -11,7 +11,8 @@ var displayedQuestion = document.querySelector("#question");
 var timer = document.querySelector(".timer");
 var score = document.querySelector("#score");
 var initials = document.querySelector("#initials");
-var submitButton = document.querySelector("#submitBtn")
+var submitButton = document.querySelector("#submitBtn");
+var highscoresLI = document.querySelector("#listOfHighscores");
 
 var currentQuestion;
 
@@ -46,17 +47,16 @@ goBack.addEventListener("click", goBackToMainPage);
 
 function goBackToMainPage() {
     welcomeContainer.setAttribute("class", "visible");
-    questionContainer.setAttribute("class", "hide");
-    highscoresForm.setAttribute("class", "hide");
     highscoresList.setAttribute("class", "hide");
-
+    document.location.reload();
 };
 
 clearHighscores.addEventListener("click", clearAllTheHighscores);
 
 function clearAllTheHighscores() {
     console.log("highscores are cleared");
-    //**this will need to clear highscores
+    localStorage.removeItem("myScores");
+    highscoresLI.innerHTML = " "
 };
 
 function nextQuestionUp() {
@@ -72,7 +72,9 @@ function nextQuestionUp() {
     };
 };
 
-submitButton.addEventListener("click", function() {
+submitButton.addEventListener("click", settingHighscores);
+
+function settingHighscores() {
     var userInitials = initials.value;
     myScores.push({score: myScore, initials: userInitials});
     window.localStorage.setItem("myScores", JSON.stringify(myScores));
@@ -80,9 +82,9 @@ submitButton.addEventListener("click", function() {
     highscoresForm.setAttribute("class", "hide");
     var scoresArr = JSON.parse(localStorage.getItem('myScores'));
     scoresArr.forEach(element => {
-        
+        highscoresLI.innerHTML += "<li>" + element.initials + ": " + element.score + "<li>";
     })
-})
+}
 
 function grabQuestion(question) {
     displayedQuestion.textContent = question.question;
