@@ -76,7 +76,9 @@ function nextQuestionUp() {
 
 submitButton.addEventListener("click", settingHighscores);
 
-function settingHighscores() {
+function settingHighscores(event) {
+    event.preventDefault();
+    
     var userInitials = initials.value;
     myScores.push({score: myScore, initials: userInitials});
     window.localStorage.setItem("myScores", JSON.stringify(myScores));
