@@ -14,6 +14,10 @@ The purpose of this project was to create a timed quiz in which users could save
 * CSS
 * JavaScript
 
+## **Application Main Page**
+
+![screenshot](./assets/IMAGES/application.PNG)
+
 ## **Important Code Snippets**
 
 A crucial part of the JavaScript code was the following function. The goal of this function was to first run a separate function that clears the current question from the user's screen if they select an answer choice. Next, the if/else conditionals states that as long as there are more questions in the question bank array to display, display the next question. Otherwise, clear the timer and bring the user to the highscores form where they will be displayed with their score and allowed to save their initials to this score.
