@@ -42,7 +42,7 @@ function showHighscores() {
     questionContainer.setAttribute("class", "hide");
     var scoresArr = JSON.parse(localStorage.getItem('myScores'));
     scoresArr.forEach(element => {
-        highscoresLI.innerHTML += "<li>" + element.initials + ": " + element.score + "<li>";
+        highscoresLI.innerHTML += "<li>" + element.initials + ": " + element.score + "</li>";
     });
 };
 
@@ -86,7 +86,8 @@ function settingHighscores(event) {
     highscoresForm.setAttribute("class", "hide");
     var scoresArr = JSON.parse(localStorage.getItem('myScores'));
     scoresArr.forEach(element => {
-        highscoresLI.innerHTML += "<li>" + element.initials + ": " + element.score + "<li>";
+        console.log(element);
+        highscoresLI.innerHTML += "<li>" + element.initials + ": " + element.score + "</li>";
     });
 };
 
